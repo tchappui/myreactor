@@ -8,6 +8,7 @@ django = "*"
 gunicorn = "*"
 numpy = "*"
 scipy = "*"
+django-extensions = "*"
 
 [dev-packages]
 

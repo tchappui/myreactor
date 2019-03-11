@@ -37,6 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Internal applications
+    'casestudy.apps.CasestudyConfig',
+    'core.apps.CoreConfig',
+    'player.apps.PlayerConfig',
+    'reactions.apps.ReactionsConfig',
+    'reactors.apps.ReactorsConfig',
+    'score.apps.ScoreConfig',
+    'sim.apps.SimConfig',
 ]
 
 MIDDLEWARE = [
