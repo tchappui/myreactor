@@ -40,11 +40,8 @@ INSTALLED_APPS = [
     # Internal applications
     'casestudy.apps.CasestudyConfig',
     'core.apps.CoreConfig',
-    'player.apps.PlayerConfig',
-    'reactions.apps.ReactionsConfig',
-    'reactors.apps.ReactorsConfig',
-    'score.apps.ScoreConfig',
-    'sim.apps.SimConfig',
+    'players.apps.PlayerConfig',
+    'scores.apps.ScoreConfig'
 ]
 
 MIDDLEWARE = [
