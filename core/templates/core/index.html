@@ -1,0 +1,36 @@
+
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block main %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>Jeu: Pilotez le réacteur chimique qui explosa lors de l'accident de Morton International en 1998</h1>
+            </div>
+        </div>
+        <div class="row">
+            <p class="col-12"><button type="button" class="start-button btn btn-success">Commencer</button></p>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <p>
+                    <img src="{% static 'img/reaction.png' %}" class="reaction" width="100%">
+                    Entre 1990 et 1998, Morton International Inc. a produit un colorant pour l'industrie pétrolière appelé 
+                    Automate Jaune 96 (Automate Yellow AY96). Les études thermiques réalisées entre 1986 et 1990 ont montré 
+                    un comportement lent et exothermique. La réaction de synthèse est suivie d'une décomposition hautement 
+                    exothermique du produit. Cette dernière réaction a été sous-estimée pour la mise à l'échelle, car l'entreprise 
+                    a continué d'augmenter l'échelle de production conservant les mêmes conditions et a même passé d'un procédé 
+                    semi-batch à un procédé discontinu. De plus, de nombreux écarts de température ont été observés dans la cuve 
+                    du réacteur de 7,6 m3 et signalés par les opérateurs. Malgré les commentaires de plusieurs superviseurs, les 
+                    écarts de température ont été ignorés. Les fortes hausses de température constituaient un problème de qualité 
+                    et non un problème de sécurité. Le 4 août 1998, sur le site de Paterson (New Jersey, USA), une explosion et 
+                    un incendie se sont produits. La décomposition de l'AY96 a causé de nombreux dommages, le rejet de matières 
+                    dangereuses et a blessé 9 employés, y compris deux d'entre eux sérieusement (US Chemical Safety and Hazard 
+                    Investigation Board, 2000).
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

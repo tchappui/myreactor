@@ -1,0 +1,63 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+  
+header.jumbotron {
+    color: #fff;
+    background-color: #069;
+    flex-grow: 0;
+    border-radius: 0px;
+}
+
+header.jumbotron a {
+    color: #fff;
+}
+
+header.jumbotron a:visited {
+    color: #fff;
+}
+
+header.jumbotron h1 a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+span.logo-intro {
+    color: #ccc;
+}
+  
+main {
+    background-color: white; 
+    flex-grow: 1;
+    display: flex;
+}
+
+main h1 {
+    margin-bottom: 32px;
+}
+
+.start-button {
+    display: block;
+    width: 150px;
+    margin: 0 auto;
+}
+
+img.reaction {
+    display: block;
+    margin: 32px 0;
+}
+  
+footer {
+    color: #fff;
+    min-height: 50px;
+    background-color: #373737;
+    flex-grow: 0;
+    padding: 32px 16px;
+}
+
+footer p {
+    margin: 0;
+}

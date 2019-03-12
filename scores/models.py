@@ -5,15 +5,15 @@ from players.models import Player
 
 class Score(models.Model):
     total_reaction_time = models.FloatField(null=False)
-    has_exploded = models.models.BooleanField(null=False, default=False)
-    final_conversion = models.models.FloatField(null=False)
+    has_exploded = models.BooleanField(null=False, default=False)
+    final_conversion = models.FloatField(null=False)
     case_study = models.ForeignKey(
         CaseStudy, 
         on_delete=models.CASCADE,
         related_name='scores'
     )
     player = models.ForeignKey(
-        CaseStudy, 
+        Player, 
         on_delete=models.CASCADE,
         related_name='scores'
     )
