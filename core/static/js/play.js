@@ -88,7 +88,7 @@ $(document).ready(function () {
                 if (data.X > 0.1) {
                     // Victoire
                     clearInterval(interval_id);
-                    $("#victoire").text(t);
+                    //$("#victoire").text(t);
                     $("#victoire").modal("show");
                     console.log("ici");
                     $.ajax({
