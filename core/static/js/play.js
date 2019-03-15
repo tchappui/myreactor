@@ -83,10 +83,11 @@ $(document).ready(function () {
                 );
                 $("#X-display").html("X = " + Number((data.X * 100).toFixed(2)).toString() + " %")
 
-                if (data.X > 0.95) {
+                if (data.X > 1) {
                     // Victoire
                     clearInterval(interval_id);
                     $("#victoire").text(t);
+                    $("#victoire").modal("show");
                     $.ajax({
                         url: $("#plots").attr("data-url") + "score/",
                         type: 'post',
@@ -97,13 +98,9 @@ $(document).ready(function () {
                         },
                         dataType: 'json',
                         success: function (data) {
-                            if (data.error) {
-                                console.log("Score could not be recorded");
-                            }
                         }
                     });
-                    $("#victoire").text(t);
-                    $("#victoire").modal("show");
+                    
 
                 }
 
