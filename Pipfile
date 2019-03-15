@@ -9,6 +9,10 @@ gunicorn = "*"
 numpy = "*"
 scipy = "*"
 django-extensions = "*"
+django-crispy-forms = "*"
+django-heroku = "*"
+psycopg2-binary = "*"
+whitenoise = "*"
 
 [dev-packages]
 

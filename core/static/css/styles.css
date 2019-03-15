@@ -4,6 +4,13 @@ body {
     flex-direction: column;
     margin: 0;
 }
+
+@media (min-width: 576px) {
+    header.jumbotron {
+        padding: 1.5rem 2rem;
+        margin-bottom: 1em;
+    }
+}
   
 header.jumbotron {
     color: #fff;
@@ -40,14 +47,35 @@ main h1 {
 }
 
 .start-button {
-    display: block;
-    width: 150px;
-    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 16px 0 32px 0;
 }
 
-img.reaction {
-    display: block;
-    margin: 32px 0;
+.start-button button {
+    width: 200px;
+}
+
+.reaction {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 16px 0 32px 0;
+}
+
+.reaction img {
+    width: 100%;
+}
+
+@media (min-width: 576px) {
+    .reaction img {
+        width: 75%;
+    }
+}
+
+.accident {
+    text-align: justify;
 }
   
 footer {
@@ -60,4 +88,62 @@ footer {
 
 footer p {
     margin: 0;
+}
+
+.plots {
+    flex-grow: 1;
+}
+
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.plots {
+    display: flex;
+}
+
+.plot {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .plot {
+        width: 50%;
+    }
+}
+
+.displays {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4em;
+    width: 100%;
+}
+
+.display {
+    width: 50%;
+    text-align: center;
+    font-family: "Orbitron", sans-serif !important;
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.temperature-btns {
+    display: flex;
+    height: 4em;
+}
+
+.temperature-btn {
+    width: 50%;
+}
+
+#failure {
+    display: none;
+}
+
+.scores {
+    float: right;
+    margin-right: 2em;
 }

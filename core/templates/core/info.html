@@ -1,0 +1,41 @@
+
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block main %}
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-6">
+      <h3>Comment se présente le réacteur?</h3>
+      <p>Vous aller contrôler la température du réacteur suivant. La 
+      <strong style="color:red">partie rouge</strong> représente le manteau externe 
+      par lequel vous aller chauffer en manipulant la température (T<sub>j</sub>).
+      La <strong style="color:#069">partie bleue</strong> représente le mélange où
+      a lieu <strong>la réaction chimique</strong> et dont la température est 
+      T<sub>r</sub>. Pour <strong>chauffer</strong>, T<sub>j</sub> doit être plus grand que 
+      T<sub>r</sub> et inversement pour <strong>refoidir</strong>.</p>
+      <p><center><img src="{% static 'img/reacteur.png' %}" width="200px"></center></p>
+    </div>
+    <div class="col-12 col-lg-6">
+      <p>Pour se <strong>chauffer ou refroidir</strong> la cuve, votre boutons
+      de contrôle sont:</p>
+      <p><center><img src="{% static 'img/cool-heat-buttons.png' %}" width="400px"></center></p>
+      <p>Vous pouvez également contrôler la température du manteau à l'aide des 
+      flèches directionnelles du clavier:</p>
+      <p><center><img src="{% static 'img/fleches.png' %}" width="400px"></center></p>
+    <div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <p>
+        <form method="post" action="{% url 'core:play' playerid=playerid %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-success" style="width: 100%">C'est parti!</button>
+        </form>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Fontawesome CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Orbitron:400,700,900" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static "css/styles.css" %}">
 
     <title>myReactor | HEIA-FR | ChemTech</title>
@@ -18,7 +19,43 @@
 
     <header id="header" class="jumbotron">
       {% block header %}
-        <h1><a href="/"><span class="logo-intro">my</span>Reactor</a></h1>
+        <a href="/">
+        <svg width="250" 
+          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 226 97.6">
+          <defs>
+            <style>
+              .cls-1,.cls-2,.cls-3,.cls-4{isolation:isolate;}.cls-2,.cls-3
+              {font-size:36px;}.cls-2,.cls-7{fill:#ccc;}.cls-2,.cls-3,.cls-4
+              {font-family:HelveticaNeue-Bold, Helvetica Neue;font-weight:700;}
+              .cls-3,.cls-4{fill:#fff;}.cls-4{font-size:72px;}.cls-5,.cls-6{fill:none;
+              stroke-miterlimit:10;}.cls-5{stroke:#ccc;stroke-width:3px;}.cls-6
+              {stroke:#fff;stroke-width:6px;}
+            </style>
+          </defs>
+          <title>logo</title>
+          <g id="Layer_2" data-name="Layer 2">
+            <g id="Layer_1-2" data-name="Layer 1">
+              <g class="cls-1">
+                <text class="cls-2" transform="translate(0 62.96)">my</text>
+                <text class="cls-3" transform="translate(51.3 62.96)">React</text>
+                <text class="cls-4" transform="translate(151.95 62.96)">
+                <tspan xml:space="preserve">   </tspan></text>
+                <text class="cls-3" transform="translate(212 62.96)">r</text>
+              </g>
+              <line class="cls-5" x1="183.89" x2="183.89" y2="61.5"/>
+              <ellipse class="cls-6" cx="183.89" cy="53" rx="21.5" ry="36.5"/>
+              <ellipse class="cls-7" cx="178.39" cy="61.5" rx="7" ry="2"/>
+              <ellipse class="cls-7" cx="189.39" cy="61.5" rx="7" ry="2"/>
+            </g>
+          </g>
+        </svg>
+        </a>
+        <ol class="scores">
+          {% for score in scores %}
+          <li>{{score.player.name|upper }}, {{ score.player.first_name}}: {{ score.total_reaction_time }} min</li>
+          {% empty %}
+          {% endfor %}
+        </ol>
       {% endblock %}
     </header>
     
@@ -28,15 +65,17 @@
         
     <footer id="footer">
       {% block fooder %}
-        <p>&copy;2019 Institut ChemTech - Haute Ecole d'Ingénierie et d'Architecture de Fribourg</p>
+        <p>&copy; 2019 Institut ChemTech - Haute Ecole d'Ingénierie et d'Architecture de Fribourg</p>
       {% endblock %}
     </footer>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="{% static "js/index.js" %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    {% block bottom_scripts %}{% endblock %}
   </body>
 </html>
