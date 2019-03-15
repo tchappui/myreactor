@@ -85,7 +85,7 @@ $(document).ready(function () {
                 );
                 $("#X-display").html("X = " + Number((data.X * 100).toFixed(2)).toString() + " %")
 
-                if (data.X > 0.95) {
+                if (data.X >= 0.95 && data.T < 220+273) {
                     // Victoire
                     clearInterval(interval_id);
                     //$("#victoire").text(t);
