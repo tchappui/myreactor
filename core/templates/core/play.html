@@ -51,7 +51,9 @@
           bureau dans l'administration).</p>
       </div>
       <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-dismiss="modal">Recommencer</button>
+          <form action="/restart/">
+          <button type="submit" class="btn btn-success">Recommencer</button>
+          </form>
       </div>
 
     </div>
@@ -79,7 +81,9 @@
         votre performance.</p>
       </div>
       <div class="modal-footer">
-        <button id="victoire-btn" type="button" class="btn btn-success" data-dismiss="modal">Recommencer</button>
+        <form action="/restart/">
+        <button id="victoire-btn" type="submit" class="btn btn-success">Recommencer</button>
+        </form>
       </div>
     </div>
   </div>
@@ -89,9 +93,6 @@
 
 {% block bottom_scripts %}
 <script>
-    $("#victoire-btn").click(function () {
-        window.location.href("/");
-    });
 
     var data = {{ data|safe }};
 

@@ -85,7 +85,7 @@ $(document).ready(function () {
                 );
                 $("#X-display").html("X = " + Number((data.X * 100).toFixed(2)).toString() + " %")
 
-                if (data.X > 0.1) {
+                if (data.X > 0.95) {
                     // Victoire
                     clearInterval(interval_id);
                     //$("#victoire").text(t);
@@ -107,7 +107,7 @@ $(document).ready(function () {
 
                 }
 
-                if (data.T > 250+273) {
+                if (data.T > 220+273) {
                     // Boom
                     clearInterval(interval_id);
                     $("#runaway").modal("show");

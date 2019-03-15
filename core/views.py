@@ -107,4 +107,7 @@ def score(request):
         score.save()
     return JsonResponse({'status': "recorded", "error": False})
 
+def restart(request):
+    return redirect('core:index');
+
 
