@@ -52,7 +52,7 @@
         </a>
         <ol class="scores">
           {% for score in scores %}
-          <li>{{score.player.name|upper }}, {{ score.player.first_name}}: {{ score.total_reaction_time }} min</li>
+          <li {% if %}>{{score.player.name|upper }}, {{ score.player.first_name}}: {{ score.total_reaction_time }} min</li>
           {% empty %}
           {% endfor %}
         </ol>
@@ -68,6 +68,9 @@
         <p>&copy; 2019 Institut ChemTech - Haute Ecole d'Ingénierie et d'Architecture de Fribourg</p>
       {% endblock %}
     </footer>
+
+    {% block modals %}
+    {% endblock %}
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
