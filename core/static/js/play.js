@@ -69,6 +69,8 @@ $(document).ready(function () {
                     data.U = U0;
                 }
 
+                console.log(data);
+
                 temperatures.series[0].addPoint(data.T-273);
                 temperatures.series[1].addPoint(data.Tj-273);
                 temperatures.series[2].addPoint(data.Tjset-273)
@@ -88,6 +90,7 @@ $(document).ready(function () {
                     clearInterval(interval_id);
                     $("#victoire").text(t);
                     $("#victoire").modal("show");
+                    console.log("ici");
                     $.ajax({
                         url: $("#plots").attr("data-url") + "score/",
                         type: 'post',
