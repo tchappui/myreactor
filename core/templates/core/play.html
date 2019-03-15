@@ -24,69 +24,62 @@
 </div>
 
 <div id="runaway" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title">Votre réacteur s'est emballé et a explosé!</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Votre réacteur s'est emballé et a explosé!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
         
-          <div class="modal-body">
-            <div class="container">
-              <p>Lorsque la température d'un réacteur ne peut être maîtrisée, on 
-              parle <strong>d'emballement thermique</strong> ou de 
-              <strong>runaway</strong>.</p>
-              <p><center><img src="{% static 'img/morton.jpg' %}" width="400px"></center></p>
-              <p>La maîtrise de ces risques a donné naissance à deux sciences: la
-              <strong>sécurité thermique des procédés chimiques et le concept 
-              sécurité des installations</strong>. Ces
-              pratiques aide <strong>l'ingénieur chimiste</strong> à identifier
-              les conditions sûres pour l'opération des réacteurs chimiques et
-              fait aujourd'hui de la chimie un des secteurs industriels les
-              plus sûrs (risque statistiquement comparable à une activité de
-              bureau dans l'administration).</p>
-            </div>
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-success" data-dismiss="modal">Recommencer</button>
-          </div>
+      <div class="modal-body">
+        <p>Lorsque la température d'un réacteur ne peut être maîtrisée, on 
+          parle <strong>d'emballement thermique</strong> ou de 
+          <strong>runaway</strong>.</p>
+          <p><center><img src="{% static 'img/morton.jpg' %}" width="400px"></center></p>
+          <p>La maîtrise de ces risques a donné naissance à deux sciences: la
+          <strong>sécurité thermique des procédés chimiques et le concept 
+          sécurité des installations</strong>. Ces
+          pratiques aide <strong>l'ingénieur chimiste</strong> à identifier
+          les conditions sûres pour l'opération des réacteurs chimiques et
+          fait aujourd'hui de la chimie un des secteurs industriels les
+          plus sûrs (risque statistiquement comparable à une activité de
+          bureau dans l'administration).</p>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal">Recommencer</button>
+      </div>
 
-        </div>
-        </div>
     </div>
+  </div>
 </div>
 
 <div id="victoire" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title">Félicitations, objectif atteint!</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Félicitations, objectif atteint!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
         
-          <div class="modal-body">
-            <div class="container">
-              <p>Vous avez atteint la conversion désirée (X = 95%) tout en maîtrisant
-              les conditions de réaction. L'objectif a été atteint en un temps
-              de <span id="reaction_time"></scan> minutes. Quel 
-              champion(-ne)!</p>
-              <p><center><img src="{% static 'img/coupe.png' %}" width="200px"></center></p>
-              <p>En appliquant les connaissances en génie chimique apprise à
-              la HEIA-FR, vous avez peut-être la possibilité d'améliorer encore
-              votre performance.</p>
-            </div>
-          </div>
-          <div class="modal-footer">
-              <button id="victoire-btn" type="button" class="btn btn-success" data-dismiss="modal">Recommencer</button>
-          </div>
-
-        </div>
-        </div>
+      <div class="modal-body">
+        <p>Vous avez atteint la conversion désirée (X = 95%) tout en maîtrisant
+        les conditions de réaction. L'objectif a été atteint en un temps
+        de <span id="reaction_time"></scan> minutes. Quel 
+        champion(-ne)!</p>
+        <p><center><img src="{% static 'img/coupe.png' %}" width="200px"></center></p>
+        <p>En appliquant les connaissances en génie chimique apprise à
+        la HEIA-FR, vous avez peut-être la possibilité d'améliorer encore
+        votre performance.</p>
+      </div>
+      <div class="modal-footer">
+        <button id="victoire-btn" type="button" class="btn btn-success" data-dismiss="modal">Recommencer</button>
+      </div>
     </div>
+  </div>
 </div>
 
 {% endblock %}
