@@ -108,6 +108,10 @@ def score(request):
     return JsonResponse({'status': "recorded", "error": False})
 
 def restart(request):
-    return redirect('core:index');
+    return redirect('core:index')
+
+def reset(request):
+    Score.objects.all().delete()
+    return redirect('core:index')
 
 
