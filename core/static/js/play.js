@@ -83,7 +83,7 @@ $(document).ready(function () {
                 );
                 $("#X-display").html("X = " + Number((data.X * 100).toFixed(2)).toString() + " %")
 
-                if (data.X > 1) {
+                if (data.X > 0.1) {
                     // Victoire
                     clearInterval(interval_id);
                     $("#victoire").text(t);
