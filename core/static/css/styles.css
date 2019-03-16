@@ -144,6 +144,14 @@ footer p {
 }
 
 .scores {
+    display: none;
     float: right;
     margin-right: 2em;
+    font-size: 0.8em;
+}
+
+@media (min-width: 576px) {
+    .scores {
+        display: block;
+    }
 }

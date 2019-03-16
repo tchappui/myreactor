@@ -20,35 +20,7 @@
     <header id="header" class="jumbotron">
       {% block header %}
         <a href="/">
-        <svg width="250" 
-          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 226 97.6">
-          <defs>
-            <style>
-              .cls-1,.cls-2,.cls-3,.cls-4{isolation:isolate;}.cls-2,.cls-3
-              {font-size:36px;}.cls-2,.cls-7{fill:#ccc;}.cls-2,.cls-3,.cls-4
-              {font-family:HelveticaNeue-Bold, Helvetica Neue;font-weight:700;}
-              .cls-3,.cls-4{fill:#fff;}.cls-4{font-size:72px;}.cls-5,.cls-6{fill:none;
-              stroke-miterlimit:10;}.cls-5{stroke:#ccc;stroke-width:3px;}.cls-6
-              {stroke:#fff;stroke-width:6px;}
-            </style>
-          </defs>
-          <title>logo</title>
-          <g id="Layer_2" data-name="Layer 2">
-            <g id="Layer_1-2" data-name="Layer 1">
-              <g class="cls-1">
-                <text class="cls-2" transform="translate(0 62.96)">my</text>
-                <text class="cls-3" transform="translate(51.3 62.96)">React</text>
-                <text class="cls-4" transform="translate(151.95 62.96)">
-                <tspan xml:space="preserve">   </tspan></text>
-                <text class="cls-3" transform="translate(212 62.96)">r</text>
-              </g>
-              <line class="cls-5" x1="183.89" x2="183.89" y2="61.5"/>
-              <ellipse class="cls-6" cx="183.89" cy="53" rx="21.5" ry="36.5"/>
-              <ellipse class="cls-7" cx="178.39" cy="61.5" rx="7" ry="2"/>
-              <ellipse class="cls-7" cx="189.39" cy="61.5" rx="7" ry="2"/>
-            </g>
-          </g>
-        </svg>
+          <img src="{% static 'img/logo.png' %}" width="250px">
         </a>
         <ol class="scores">
           {% for score in scores %}
