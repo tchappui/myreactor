@@ -49,47 +49,47 @@ $(document).ready(function () {
         }
     });
 
-    $("#slider1").on("input change", () => {
+    $("#slider1").on("change", function () {
         const value = $('#slider1');
         data.slider1 = value.val();
     });
 
-    $("#slider2").on("input change", () => {
+    $("#slider2").on("input change", function () {
         const value = $('#slider2');
         data.slider2 = value.val();
     });
 
-    $("#slider3").on("input change", () => {
+    $("#slider3").on("input change", function () {
         const value = $('#slider3');
         data.slider3 = value.val();
     });
 
-    $("#slider4").on("input change", () => {
+    $("#slider4").on("input change", function () {
         const value = $('#slider4');
         data.slider4 = value.val();
     });
 
-    $("#slider5").on("input change", () => {
+    $("#slider5").on("input change", function () {
         const value = $('#slider5');
         data.slider5 = value.val();
     });
 
-    $("#slider6").on("input change", () => {
+    $("#slider6").on("input change", function () {
         const value = $('#slider6');
         data.slider6 = value.val();
     });
 
-    $("#slider7").on("input change", () => {
+    $("#slider7").on("input change", function () {
         const value = $('#slider7');
         data.slider7 = value.val();
     });
 
-    $("#slider8").on("input change", () => {
+    $("#slider8").on("input change", function () {
         const value = $('#slider8');
         data.slider8 = value.val();
     });
 
-    $("#slider9").on("input change", () => {
+    $("#slider9").on("input change", function () {
         const value = $('#slider9');
         data.slider9 = value.val();
     });
@@ -114,8 +114,6 @@ $(document).ready(function () {
                 //     data.U = U0;
                 // }
 
-                console.log(data);
-
                 temperatures.series[0].addPoint(data.T - 273);
                 temperatures.series[1].addPoint(data.Tj - 273);
                 temperatures.series[2].addPoint(data.Tjset - 273)
@@ -135,7 +133,7 @@ $(document).ready(function () {
                     clearInterval(interval_id);
                     //$("#victoire").text(t);
                     $("#victoire").modal("show");
-                    console.log("ici");
+
                     $.ajax({
                         url: $("#plots").attr("data-url") + "score/",
                         type: 'post',
