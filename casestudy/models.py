@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class CaseStudy(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
@@ -7,4 +8,3 @@ class CaseStudy(models.Model):
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    
