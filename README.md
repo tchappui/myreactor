@@ -4,9 +4,9 @@ Online game implemented as Python and Django application where the player is inv
 
 ## Installation
 
-1. Download
+1. Download https://github.com/tchappui/myreactor/archive/refs/heads/labo2021.zip and unzip the archive
 2. Open a console in the project folder
-3. Create an environement with conda create -n nomduprojet python==3.9
+3. Create an environement with conda create -n nomduprojet python==3.9 or pipenv with pipenv install
 4. Activate the environment with conda activate nomduprojet
 5. Install the dependencies with pip install -r requirements.txt
 6. Create the database with python manage.py migrate
