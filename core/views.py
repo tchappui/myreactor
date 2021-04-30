@@ -37,6 +37,15 @@ def play(request, playerid):
         'U': solvers.U0,
         'X': 0,
         'playerid': playerid
+        'slider1': solvers.slider10,
+        'slider2': solvers.slider20,
+        'slider3': solvers.slider30,
+        'slider4': solvers.slider40,
+        'slider5': solvers.slider50,
+        'slider6': solvers.slider60,
+        'slider7': solvers.slider70,
+        'slider8': solvers.slider80,
+        'slider9': solvers.slider90,
     }
 
     best_scores = Score.objects.order_by('total_reaction_time')[:5]
@@ -46,7 +55,16 @@ def play(request, playerid):
         'core/play.html',
         {
             'data': json.dumps(data),
-            'scores': best_scores
+            'scores': best_scores,
+            'slider10': solvers.slider10,
+            'slider20': solvers.slider20,
+            'slider30': solvers.slider30,
+            'slider40': solvers.slider40,
+            'slider50': solvers.slider50,
+            'slider60': solvers.slider60,
+            'slider70': solvers.slider70,
+            'slider80': solvers.slider80,
+            'slider90': solvers.slider90,
         }
     )
 
@@ -86,7 +104,7 @@ def play_data(request):
         data['playerid'] = int(data['playerid'])
         while True:
             try:
-                data = solvers.morton(**data)
+                data = solvers.model(**data)
             except Exception as e:
                 solvers.Dt = solvers.Dt/1.5
                 if solvers.Dt < 1e-6:

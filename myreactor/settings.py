@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Internal applications
-    'casestudy.apps.CasestudyConfig',
     'core.apps.CoreConfig',
     'players.apps.PlayersConfig',
     'scores.apps.ScoresConfig',

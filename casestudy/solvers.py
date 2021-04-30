@@ -31,7 +31,17 @@ T0 = 298. # K
 Tj0 = 298. # K
 Tjset0 = 298. # K
 
-def morton(
+slider10 = 0
+slider20 = 0
+slider30 = 0
+slider40 = 0
+slider50 = 0
+slider60 = 0
+slider70 = 0
+slider80 = 0
+slider90 = 0
+
+def model(
     CA=CA0, 
     CB=CB0, 
     CC=CC0, 
@@ -42,7 +52,16 @@ def morton(
     Tjset=Tjset0,
     U=U0,
     X=0,
-    playerid=0
+    playerid=0,
+    slider1=slider10,
+    slider2=slider20,
+    slider3=slider30,
+    slider4=slider40,
+    slider5=slider50,
+    slider6=slider60,
+    slider7=slider70,
+    slider8=slider80,
+    slider9=slider90,
 ):
     
     def balances(variables, t):
