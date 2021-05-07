@@ -64,7 +64,10 @@ def model(
     slider8=slider80,
     slider9=slider90,
 ):
-    print(float(slider10))
+    print(
+        f"slider1 = {slider1} | slider2 = {slider2} | slider3 = {slider3} | slider4 = {slider4}\n"
+        f"slider5 = {slider5} | slider6 = {slider6} | slider7 = {slider7} | slider8 = {slider8}"
+    )
 
     def balances(variables, t):
         CA, CB, CC, CD, CE, T, Tj = variables  # mol / g
