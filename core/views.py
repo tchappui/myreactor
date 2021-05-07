@@ -23,6 +23,7 @@ def index(request):
 
 def play(request, playerid):
     data = {
+        't': 0,
         'CA': solvers.CA0,
         'CB': solvers.CB0,
         'CC': solvers.CC0,
@@ -33,6 +34,7 @@ def play(request, playerid):
         'Tjset': solvers.Tjset0,
         'U': solvers.U0,
         'X': 0,
+        'V': solvers.Vin,
         'playerid': playerid,
         'slider1': solvers.slider10,
         'slider2': solvers.slider20,
@@ -92,20 +94,10 @@ def register(request):
 
 
 def play_data(request):
-    solvers.Dt = 60
-    if request.is_ajax():
-        data = {k: float(i) for k, i in request.POST.dict().items()}
-        data['playerid'] = int(data['playerid'])
-        while True:
-            try:
-                data = solvers.model(**data)
-            except Exception as e:
-                solvers.Dt = solvers.Dt / 1.5
-                if solvers.Dt < 1e-6:
-                    break
-            else:
-                break
-        return JsonResponse(data)
+    data = {k: float(i) for k, i in request.POST.dict().items()}
+    data['playerid'] = int(data['playerid'])
+    data = solvers.model(**data)
+    return JsonResponse(data)
 
 
 def score(request):

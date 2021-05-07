@@ -4,32 +4,32 @@ from scipy.integrate import odeint
 Dt = 60
 
 R = 8.314  # J / mol / K
-V = 7.6  # m3
-rho = 900.0  # kg/m3
-k01 = 7e8  # g**0.42 / s / mol**0.42
-k02 = 5e10  # g**0.48 / s / mol**0.48
-DHr1 = -368.0  # J / g
-DHr2 = -670.0  # J / g
-U0 = 700.0  # W / m**2 / K
-A = 7.4  # m**2
-Ea1 = 83400.0  # J / mol
-Ea2 = 113600.0  # J / mol
-cp = 2000.0 * (1.0 / 1000.0)  # J / g / K
-Cw = 670.0  # J / K
-alpha = 12.0  # W / K
-Tambiant = 293.0  # K
-tau = 1500  # s
+V0 = 600  # L
+Vin = 0.5 * V0
+Vmax = Vin + 0.4 * V0
+rho = 1  # g / L
+DHr = -5.6e5  # J / mol
+Ea = 9200 * R  # J / mol
+Cp = 4180  # J / g / K
+tau = 10  # s
+F0max = 1  # L/s
 
-m = V * rho * (1000.0 / 1.0)  # g
 
-CA0 = 15900.0 / m  # mol / g
-CB0 = 15300.0 / m  # mol / g
-CC0 = 0.0  # mol / g
-CD0 = 0.0  # mol / g
-CE0 = 100.0 / m  # mol / g
-T0 = 298.0  # K
-Tj0 = 298.0  # K
-Tjset0 = 298.0  # K
+CA0 = 1.6  # M
+CB0 = 0.45  # M
+CC0 = 0  # M
+CD0 = 0  # M
+CBdosage = 2.4  # M
+CE0 = 0  # M
+k0 = 6.85e11  # L / mol / s
+T0 = 298  # K
+Tj0 = 298  # K
+Tjset0 = 298  # K
+Tmax = 150 + 273  # K
+U0 = 250  # W / m**2 / K
+
+# Définition du volume du réacteur BESOIN DE BOUTON 600 OU 5 L
+A = 1.4  # m2
 
 slider10 = 0
 slider20 = 0
@@ -43,6 +43,7 @@ slider90 = 0
 
 
 def model(
+    t=0,
     CA=CA0,
     CB=CB0,
     CC=CC0,
@@ -53,6 +54,7 @@ def model(
     Tjset=Tjset0,
     U=U0,
     X=0,
+    V=Vin,
     playerid=0,
     slider1=slider10,
     slider2=slider20,
@@ -66,59 +68,67 @@ def model(
 ):
     print(
         f"slider1 = {slider1} | slider2 = {slider2} | slider3 = {slider3} | slider4 = {slider4}\n"
-        f"slider5 = {slider5} | slider6 = {slider6} | slider7 = {slider7} | slider8 = {slider8}"
+        f"slider5 = {slider5} | slider6 = {slider6} | slider7 = {slider7} | slider8 = {slider8}\n"
+        f"t = {t} min | V = {V} L"
     )
 
-    def balances(variables, t):
-        CA, CB, CC, CD, CE, T, Tj = variables  # mol / g
+    F0 = float(slider1) / 100 * F0max  # L / s
+    TB = float(slider2) / 100 * Tmax  # K
 
-        r1 = (
-            k01 * np.exp(-Ea1 / R / T) * CA ** 0.94 * CB ** 0.48
-        )  # mol / g / s
-        r2 = (
-            k02 * np.exp(-Ea2 / R / T) * CC ** 0.83 * CE ** 0.65
-        )  # mol / g / s
+    # Définition des équations différentielles décrivant les profils des concentrations
+    def eq(valeurs, t, F0):
+        NA, NB, T, Tj = valeurs
 
-        RA = -r1  # mol / g / s
-        RB = -r1  # mol / g / s
-        RC = r1 - r2  # mol / g / s
-        RD = r1  # mol / g / s
-        RE = r2  # mol / g / s
+        Vi = V + F0 * t
 
-        dCA = RA  # mol / g / s
-        dCB = RB  # mol / g / s
-        dCC = RC  # mol / g / s
-        dCD = RD  # mol / g / s
-        dCE = RE  # mol / g / s
+        if Vi >= Vmax:
+            F0 = 0
+            Vi = Vmax
 
-        Qloss = alpha * (Tambiant - T)
-        Qex = U * A * (Tj - T)
-        Qr = m / CA0 * (r1 * (-DHr1) + r2 * (-DHr2))
+        CA = NA / Vi
+        CB = NB / Vi
 
-        dT = (Qr + Qex + Qloss) / (m * cp + Cw)
+        U = float(slider3) * U0 / 100 * 5.98 + 5
 
+        k = k0 * np.exp(-Ea / R / T)
+
+        r = k * CA * CB
+
+        RA = -r
+        RB = -2 * r
+
+        dNA = RA * Vi
+        dNB = RB * Vi + CBdosage * F0
+        dT = (
+            F0 * (TB - T) / Vi
+            - DHr * r / rho / Cp
+            - U * A * (T - Tj) / Vi / rho / Cp
+        )
         dTj = (Tjset - Tj) / tau
-
-        return [dCA, dCB, dCC, dCD, dCE, dT, dTj]
+        return [dNA, dNB, dT, dTj]
 
     results = odeint(
-        balances, [CA, CB, CC, CD, CE, T, Tj], np.linspace(0, Dt, 2)
+        eq, [CA * V, CB * V, T, Tj], np.linspace(0, Dt, 10), (F0,)
     )
 
     if np.isnan(results).any():
         raise ValueError("Le réacteur s'est emballé!")
 
+    V = V + F0 * t
+
     return {
-        'CA': results[-1, 0],
-        'CB': results[-1, 1],
-        'CC': results[-1, 2],
-        'CD': results[-1, 3],
-        'CE': results[-1, 4],
-        'T': results[-1, 5],
-        'Tj': results[-1, 6],
+        't': t + 1,
+        'CA': results[-1, 0] / V,
+        'CB': results[-1, 1] / V,
+        'CC': CC,
+        'CD': CD,
+        'CE': CE,
+        'T': T,
+        'Tj': Tj,
         'Tjset': Tjset,
         'U': U,
-        'X': 1 - results[-1, 0] / CA0,
+        'X': X,
+        'V': V,
         'playerid': playerid,
         'slider1': slider1,
         'slider2': slider2,

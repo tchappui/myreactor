@@ -5,7 +5,6 @@ $(document).ready(function () {
     }
 
     interval_id = null;
-    t = 0;
 
     U0 = data.U;
 
@@ -102,17 +101,6 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (newdata) {
                 data = newdata;
-                t += 1;
-
-                // Simulating of failure of the temperature control system
-                // if (t > t_failure_start && t < t_failure_stop) {
-                //     data.U = 0;
-                //     $("#failure").show();
-                // }
-                // else {
-                //     $("#failure").hide();
-                //     data.U = U0;
-                // }
 
                 temperatures.series[0].addPoint(data.T - 273);
                 temperatures.series[1].addPoint(data.Tj - 273);
@@ -139,7 +127,7 @@ $(document).ready(function () {
                         type: 'post',
                         data: {
                             "player": data.playerid,
-                            "t": t,
+                            "t": data.t,
                             "X": data.X
                         },
                         dataType: 'json',
