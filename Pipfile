@@ -14,11 +14,11 @@ psycopg2-binary = "*"
 django-environ = "*"
 crispy-bootstrap4 = "*"
 
-
 [dev-packages]
 
 [prod]
-pymysql = "*"
+mysqlclient = "*"
+sentry-sdk = {extras = ["django"], version = "*"}
 
 [requires]
 python_version = "3.10"
