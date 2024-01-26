@@ -83,15 +83,14 @@ def play_data(request):
 
 
 def score(request):
-    if request.is_ajax():
-        data = {k: i for k, i in request.POST.dict().items()}
-        player = Player.objects.get(pk=int(data["player"]))
-        score = Score(
-            total_reaction_time=int(data["t"]),
-            final_conversion=float(data["X"]),
-            player=player,
-        )
-        score.save()
+    data = {k: i for k, i in request.POST.dict().items()}
+    player = Player.objects.get(pk=int(data["player"]))
+    score = Score(
+        total_reaction_time=int(data["t"]),
+        final_conversion=float(data["X"]),
+        player=player,
+    )
+    score.save()
     return JsonResponse({"status": "recorded", "error": False})
 
 

@@ -13,4 +13,4 @@ class Player(models.Model):
         ordering = ("name",)
 
     def __str__(self):
-        return f"{self.id} {self.email} {self.first_name} {self.name}"
+        return f"{self.name}"

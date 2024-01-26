@@ -88,9 +88,7 @@ $(document).ready(function () {
                 if (data.X >= 0.95 && data.T < 220+273) {
                     // Victoire
                     clearInterval(interval_id);
-                    //$("#victoire").text(t);
                     $("#victoire").modal("show");
-                    console.log("ici");
                     $.ajax({
                         url: $("#plots").attr("data-url") + "score/",
                         type: 'post',

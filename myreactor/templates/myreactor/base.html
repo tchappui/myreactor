@@ -24,7 +24,7 @@
         </a>
         <ol class="scores">
           {% for score in scores %}
-          <li {% if forloop.first %}class="first"{% endif %}>{{score.player.name|upper }}, {{ score.player.first_name}}: {{ score.total_reaction_time }} min</li>
+          <li {% if forloop.first %}class="first"{% endif %}>{{score.player.name }}: {{ score.total_reaction_time }} min</li>
           {% empty %}
           {% endfor %}
         </ol>
