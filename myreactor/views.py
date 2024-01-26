@@ -59,13 +59,9 @@ def register(request):
     if request.method == "POST":
         form = PlayerForm(request.POST)
         if form.is_valid():
-            email = form.cleaned_data["email"]
-            first_name = form.cleaned_data["first_name"]
             name = form.cleaned_data["name"]
 
-            player, created = Player.objects.get_or_create(email=email)
-            player.first_name, player.name = first_name, name
-            player.save()
+            player, created = Player.objects.get_or_create(name=name)
             return redirect("myreactor:info", playerid=player.id)
     return redirect("myreactor:index")
 
