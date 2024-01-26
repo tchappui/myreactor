@@ -1,0 +1,237 @@
+
+{% extends 'myreactor/base.html' %}
+
+{% load static %}
+
+{% block main %}
+<div id="dashboard" class="dashboard">
+    <div id="failure" class="alert alert-danger" role="alert">
+    Attention, panne du système de refroidissement! La réaction n'est plus sous
+    contrôle.
+  </div>
+    <div id="plots" class="plots" data-url="{% url 'myreactor:play_data' %}">
+        <div id="plot-temperatures" class="plot plot-temperatures"></div>
+        <div id="plot-concentrations" class="plot plot-concentrations"></div>
+    </div>
+    <div id="displays" class="displays">
+        <div id="tj-display" class="display">T<sub>j</sub> = 30 °C</div>
+        <div id="X-display" class="display">T<sub>r</sub> = 30 °C</div>
+    </div>
+    <div id="temperature-btns" class="temperature-btns">
+        <button id="cool-btn" type="button" class="btn btn-success temperature-btn">Refroidir</button>
+        <button id="heat-btn" type="button" class="btn btn-danger temperature-btn">Chauffer</button>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block modals %}
+<div id="runaway" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Votre réacteur s'est emballé et a explosé!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        
+      <div class="modal-body">
+        <p>Lorsque la température d'un réacteur ne peut être maîtrisée, on 
+          parle <strong>d'emballement thermique</strong> ou de 
+          <strong>runaway</strong>.</p>
+          <p><center><img src="{% static 'img/morton.jpg' %}" width="400px"></center></p>
+          <p>La maîtrise de ces risques a donné naissance à deux sciences: la
+          <strong>sécurité thermique des procédés chimiques et le concept 
+          sécurité des installations</strong>. Ces
+          pratiques aide <strong>l'ingénieur chimiste</strong> à identifier
+          les conditions sûres pour l'opération des réacteurs chimiques et
+          fait aujourd'hui de la chimie un des secteurs industriels les
+          plus sûrs (risque statistiquement comparable à une activité de
+          bureau dans l'administration).</p>
+      </div>
+      <div class="modal-footer">
+          <form action="/restart/">
+          <button type="submit" class="btn btn-success">Recommencer</button>
+          </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="victoire" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Félicitations, objectif atteint!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+        
+      <div class="modal-body">
+        <p>Vous avez atteint la conversion désirée (X = 95%) tout en maîtrisant
+        les conditions de réaction. Quel champion(-ne)!</p>
+        <p><center><img src="{% static 'img/coupe.png' %}" width="200px"></center></p>
+        <p>En appliquant les connaissances en génie chimique apprises à
+        la HEIA-FR, vous avez peut-être la possibilité d'améliorer encore
+        votre performance.</p>
+      </div>
+      <div class="modal-footer">
+        <form action="/restart/">
+        <button id="victoire-btn" type="submit" class="btn btn-success">Recommencer</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block bottom_scripts %}
+<script>
+
+    var data = {{ data|safe }};
+
+    t_failure = Math.floor(Math.random() * 900);
+    t_failure_end = t_failure + 10 + Math.floor(Math.random() * 30);
+
+    // Plots
+    var temperatures = Highcharts.chart('plot-temperatures', {
+
+        title: {
+          text: 'Suivi des températures'
+        },
+
+        xAxis: {
+          title: {
+            text: 'temps (min)'
+          }
+        },
+
+        yAxis: {
+          title: {
+            text: 'température (°C)'
+          }
+        },
+        legend: {
+          layout: 'horizontal',
+          align: 'left',
+          verticalAlign: 'top'
+        },
+
+        plotOptions: {
+          series: {
+            label: {
+              connectorAllowed: false
+            },
+            marker: {
+                enabled: false
+            },
+            pointStart: 0
+          }
+        },
+
+        series: [{
+          name: 'Tr',
+          color: '#069',
+          data: []
+        }, {
+          name: 'Tj',
+          color: '#dc3545',
+          data: []
+        }, {
+          name: 'Tj,commande',
+          color: '#000',
+          data: []
+        }],
+
+        responsive: {
+          rules: [{
+            condition: {
+              maxWidth: 500
+            },
+            chartOptions: {
+              legend: {
+                layout: 'horizontal',
+                align: 'center',
+                verticalAlign: 'bottom'
+              }
+            }
+          }]
+        }
+
+      });
+
+      var concentrations = Highcharts.chart('plot-concentrations', {
+
+        title: {
+          text: 'Suivi des concentrations'
+        },
+
+        xAxis: {
+          title: {
+            text: 'temps (min)'
+          }
+        },
+
+        yAxis: {
+          title: {
+            text: 'Concentrations (mol/g)'
+          }
+        },
+        legend: {
+          layout: 'horizontal',
+          align: 'left',
+          verticalAlign: 'top'
+        },
+
+        plotOptions: {
+          series: {
+            label: {
+              connectorAllowed: false
+            },
+            marker: {
+                enabled: false
+            },
+            pointStart: 0
+          }
+        },
+
+        series: [{
+          name: '2-EHA (A)',
+          data: []
+        }, {
+          name: 'o-NCB (B)',
+          data: []
+        }, {
+          name: 'AY96 (C)',
+          data: []
+        }, {
+          name: 'HCl (D)',
+          data: []
+        }, {
+          name: 'Autres (E)',
+          data: []
+        }],
+
+        responsive: {
+          rules: [{
+            condition: {
+              maxWidth: 500
+            },
+            chartOptions: {
+              legend: {
+                layout: 'horizontal',
+                align: 'center',
+                verticalAlign: 'bottom'
+              }
+            }
+          }]
+        }
+
+      });
+</script>
+<script src="{% static "js/play.js" %}"></script>
+{% endblock %}

@@ -1,23 +1,16 @@
-"""myreactor URL Configuration
+from django.urls import path
+from . import views
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.11/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.conf.urls import url, include
-    2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
-"""
-from django.urls import path, include
-from django.contrib import admin
-
+app_name = "myreactor"
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('core.urls', namespace='core')),
+    # post views
+    path("", views.index, name="index"),
+    path("restart/", views.restart, name="restart"),
+    path("play/data/", views.play_data, name="play_data"),
+    path("play/<int:playerid>/", views.play, name="play"),
+    path("play/data/score/", views.score, name="score"),
+    path("info/<int:playerid>/", views.info, name="info"),
+    path("register/", views.register, name="register"),
+    path("reset-all-scores/", views.reset, name="reset"),
 ]

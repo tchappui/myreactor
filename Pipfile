@@ -11,7 +11,14 @@ scipy = "*"
 django-extensions = "*"
 django-crispy-forms = "*"
 psycopg2-binary = "*"
+django-environ = "*"
+crispy-bootstrap4 = "*"
+
 
 [dev-packages]
 
+[prod]
+pymysql = "*"
+
 [requires]
+python_version = "3.11"
