@@ -5,10 +5,6 @@
 
 {% block main %}
 <div id="dashboard" class="dashboard">
-    <div id="failure" class="alert alert-danger" role="alert">
-    Attention, panne du système de refroidissement! La réaction n'est plus sous
-    contrôle.
-  </div>
     <div id="plots" class="plots" data-url="{% url 'myreactor:play_data' %}">
         <div id="plot-temperatures" class="plot plot-temperatures"></div>
         <div id="plot-concentrations" class="plot plot-concentrations"></div>

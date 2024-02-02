@@ -1,19 +1,6 @@
 $(document).ready(function () {
-
-    function getRandomInteger(min, max) {
-        return Math.floor(Math.random() * (max - min + 1) ) + min;
-      }
-
     interval_id = null;
     t = 0;
-
-    U0 = data.U;
-
-    t_failure_start = getRandomInteger(30, 300); 
-    t_failure_stop = t_failure_start + 10 + getRandomInteger(10, 50);
-
-    console.log(t_failure_start);
-    console.log(t_failure_stop);
 
     function csrfSafeMethod(method) {
         // these HTTP methods do not require CSRF protection
@@ -58,18 +45,6 @@ $(document).ready(function () {
             success: function (newdata) {
                 data = newdata;
                 t += 1;
-
-                // Simulating of failure of the temperature control system
-                if (t > t_failure_start && t < t_failure_stop) {
-                    data.U = 0;
-                    $("#failure").show();
-                }
-                else {
-                    $("#failure").hide(); 
-                    data.U = U0;
-                }
-
-                console.log(data);
 
                 temperatures.series[0].addPoint(data.T-273);
                 temperatures.series[1].addPoint(data.Tj-273);
