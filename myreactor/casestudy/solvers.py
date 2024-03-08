@@ -58,7 +58,6 @@ def morton(
     mdot=mdot0,
     Vdot=Vdot0,
     Dmdot=Dmdot,
-    mmax=False,
     playerid=0,
 ):
 
@@ -110,8 +109,6 @@ def morton(
 
     NA, NB, NC, ND, NE, T, Tj, m = results.T
 
-    print(results.T)
-
     if np.isnan(results).any():
         raise ValueError("Le réacteur s'est emballé!")
 
@@ -130,6 +127,5 @@ def morton(
         "mdot": mdot,
         "Vdot": Vdot,
         "Dmdot": Dmdot,
-        "mmax": m[-1] >= mmax,
         "playerid": playerid,
     }
