@@ -28,11 +28,16 @@ def play(request, playerid):
         "CC": solvers.CC0,
         "CD": solvers.CD0,
         "CE": solvers.CE0,
+        "m": solvers.m0,
         "T": solvers.T0,
         "Tj": solvers.Tj0,
         "Tjset": solvers.Tjset0,
         "U": solvers.U0,
         "X": 0,
+        "mdot": solvers.mdot0,
+        "Vdot": solvers.Vdot0,
+        "Dmdot": solvers.Dmdot,
+        "playerid": playerid,
         "playerid": playerid,
     }
 

@@ -16,11 +16,20 @@ $(document).ready(function () {
     });
 
     $("body").keydown(function (e) {
-        if (e.key == "ArrowDown" || e.key == "ArrowLeft") {
+        if (e.key == "ArrowDown") {
             $("#cool-btn").click();
         }
-        else if (e.key == "ArrowUp" || e.key == "ArrowRight") {
+        else if (e.key == "ArrowUp") {
             $("#heat-btn").click();
+        }
+        else if (e.key == "ArrowLeft") {
+            data.mdot -= data.Dmdot
+            if (data.mdot < 0) {
+                data.mdot = 0.0
+            }
+        }
+        else if (e.key == "ArrowRight") {
+            data.mdot += data.Dmdot
         }
     });
 
@@ -59,6 +68,7 @@ $(document).ready(function () {
                     '<span style="color:#069">T<sub>r</sub> = ' + Number((data.T-273).toFixed(2)).toString() + " °C"
                 );
                 $("#X-display").html("X = " + Number((data.X * 100).toFixed(2)).toString() + " %")
+                $("#mdot-display").html("débit = " + Number((data.mdot).toFixed(2)).toString() + " g/s")
 
                 if (data.X >= 0.95 && data.T < 168+273) {
                     // Victoire
