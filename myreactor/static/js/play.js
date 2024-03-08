@@ -24,13 +24,13 @@ $(document).ready(function () {
         }
         else if (e.key == "ArrowLeft") {
             data.mdot -= data.Dmdot
-            if (data.mdot < 0 || data.mmax) {
+            if (data.mdot < 0 || data.m / 1000 / 900 >= 7.6) {
                 data.mdot = 0.0
             }
         }
         else if (e.key == "ArrowRight") {
             data.mdot += data.Dmdot
-            if (data.mmax) {
+            if (data.m / 1000 / 900 > 7.6) {
                 data.mdot = 0.0
             }
         }
@@ -72,7 +72,7 @@ $(document).ready(function () {
                     '<span style="color:#069">T<sub>r</sub> = ' + Number((data.T-273).toFixed(2)).toString() + " °C"
                 );
                 $("#X-display").html("X = " + Number((data.X * 100).toFixed(2)).toString() + " %")
-                $("#mdot-display").html("débit = " + Number((data.mdot).toFixed(2)).toString() + " g/s")
+                $("#mdot-display").html("F = " + Number((data.mdot).toFixed(2)).toString() + " g/s")
                 $("#volume-display").html("V = " + Number((data.m / 1000 / 900).toFixed(2)).toString() + " m<sup>3</sup>")
   
 
