@@ -4,8 +4,8 @@ from scipy.integrate import odeint
 Dt = 60
 
 R = 8.314  # J / mol / K
-Vmax = 5.0 # m3
-V0 = 7.6  # m3
+V0 = 4.6  # m3
+Vmax = 7.6  # m3
 rho = 900.0  # kg/m3
 k01 = 7e8  # g**0.42 / s / mol**0.42
 k02 = 4e10  # g**0.48 / s / mol**0.48
@@ -24,11 +24,11 @@ tau = 1500  # s
 m0 = V0 * rho * (1000.0 / 1.0)  # g
 mmax = Vmax * rho * (1000.0 / 1.0)  # g
 
-NAF = 15900.0 # mol
-mF = mmax - m0 # g
+NAF = 15900.0  # mol
+mF = mmax - m0  # g
 CAF = NAF / mF  # mol / g
 CA0 = 0  # mol / g
-NB0 = 15300.0 # mol
+NB0 = 15300.0  # mol
 CB0 = NB0 / m0  # mol / g
 CC0 = 0.0  # mol / g
 CD0 = 0.0  # mol / g
@@ -37,9 +37,10 @@ T0 = 298.0  # K
 Tj0 = 298.0  # K
 Tjset0 = 298.0  # K
 
-mdot0 = 1 # g / s
-Vdot0 = mdot0 / 1000. / rho # m3 / s
-Dmdot = 0.01 # g / s
+tdos = 1.5  # h
+mdot0 = mF / tdos / 3600.0  # g / s
+Vdot0 = mdot0 / 1000.0 / rho  # m3 / s
+Dmdot = 0.01  # g / s
 
 
 def morton(
@@ -61,7 +62,13 @@ def morton(
 ):
 
     def balances(variables, t):
-        CA, CB, CC, CD, CE, T, Tj, m = variables  # mol / g
+        NA, NB, NC, ND, NE, T, Tj, m = variables  # mol / g
+
+        CA = NA / m
+        CB = NB / m
+        CC = NC / m
+        CD = ND / m
+        CE = NE / m
 
         r1 = k01 * np.exp(-Ea1 / R / T) * CA**0.94 * CB**0.48  # mol / g / s
         r2 = k02 * np.exp(-Ea2 / R / T) * CC**0.83 * CE**0.65  # mol / g / s
@@ -72,12 +79,16 @@ def morton(
         RD = r1  # mol / g / s
         RE = r2  # mol / g / s
 
-        dm = mdot
-        dCA = RA + mdot * CAF / m  # mol / g / s
-        dCB = RB  # mol / g / s
-        dCC = RC  # mol / g / s
-        dCD = RD  # mol / g / s
-        dCE = RE  # mol / g / s
+        if m > mmax:
+            print("mmax atteint")
+            mdot = 0
+
+        dm = 0
+        dNA = RA * m  # + mdot * CAF  # mol / s
+        dNB = RB * m  # mol / s
+        dNC = RC * m  # mol / s
+        dND = RD * m  # mol / s
+        dNE = RE * m  # mol / s
 
         Qloss = alpha * (Tambiant - T)
         Qex = U * A * (Tj - T)
@@ -88,29 +99,33 @@ def morton(
 
         dTj = (Tjset - Tj) / tau
 
-        return dCA, dCB, dCC, dCD, dCE, dT, dTj, dm
+        return dNA, dNB, dNC, dND, dNE, dT, dTj, dm
 
     results = odeint(
-        balances, [CA, CB, CC, CD, CE, T, Tj, m], np.linspace(0, Dt, 2)
+        balances,
+        [CA * m, CB * m, CC * m, CD * m, CE * m, T, Tj, m],
+        np.linspace(0, Dt, 2),
     )
+
+    NA, NB, NC, ND, NE, T, Tj, m = results.T
+
+    print(results.T)
 
     if np.isnan(results).any():
         raise ValueError("Le réacteur s'est emballé!")
-    
-    CA, CB, CC, CD, CE, T, Tj, m = results.T
 
     return {
-        "CA": CA,
-        "CB": CB,
-        "CC": CC,
-        "CD": CD,
-        "CE": CE,
-        "m": m,
-        "T": T,
-        "Tj": Tj,
+        "CA": NA[-1] / m[-1],
+        "CB": NB[-1] / m[-1],
+        "CC": NC[-1] / m[-1],
+        "CD": ND[-1] / m[-1],
+        "CE": NE[-1] / m[-1],
+        "m": m[-1],
+        "T": T[-1],
+        "Tj": Tj[-1],
         "Tjset": Tjset,
         "U": U,
-        "X": 1 - CB * m / NB0,
+        "X": 1 - NB[-1] / NB0,
         "mdot": mdot,
         "Vdot": Vdot,
         "Dmdot": Dmdot,

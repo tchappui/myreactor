@@ -38,7 +38,6 @@ def play(request, playerid):
         "Vdot": solvers.Vdot0,
         "Dmdot": solvers.Dmdot,
         "playerid": playerid,
-        "playerid": playerid,
     }
 
     best_scores = Score.objects.order_by("total_reaction_time")[:5]
@@ -79,7 +78,7 @@ def play_data(request):
         try:
             data = solvers.morton(**data)
         except Exception as e:
-            solvers.Dt = solvers.Dt / 1.5
+            solvers.Dt /= 1.5
             if solvers.Dt < 1e-6:
                 break
         else:

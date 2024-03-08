@@ -53,6 +53,7 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (newdata) {
                 data = newdata;
+                console.log(data)
                 t += 1;
 
                 temperatures.series[0].addPoint(data.T-273);
