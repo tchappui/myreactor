@@ -73,7 +73,7 @@ $(document).ready(function () {
                 );
                 $("#X-display").html("X = " + Number((data.X * 100).toFixed(2)).toString() + " %")
                 $("#mdot-display").html("débit = " + Number((data.mdot).toFixed(2)).toString() + " g/s")
-                $("#volume-display").html("Volume = " + Number((data.m / 1000 / rho).toFixed(2)).toString() + " <sup>3</sup>")
+                $("#volume-display").html("V = " + Number((data.m / 1000 / 900).toFixed(2)).toString() + " m<sup>3</sup>")
   
 
                 if (data.X >= 0.95 && data.T < 168+273) {
