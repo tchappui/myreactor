@@ -40,7 +40,7 @@ Tjset0 = 298.0  # K
 tdos = 8  # h
 mdot0 = mF / tdos / 3600.0  # g / s
 Vdot0 = mdot0 / 1000.0 / rho  # m3 / s
-Dmdot = 0.01  # g / s
+Dmdot = 1.0  # g / s
 
 
 def morton(
@@ -58,6 +58,7 @@ def morton(
     mdot=mdot0,
     Vdot=Vdot0,
     Dmdot=Dmdot,
+    mmax=False,
     playerid=0,
 ):
 
@@ -81,7 +82,6 @@ def morton(
 
         mdotdos = mdot
         if m > mmax:
-            print("mmax atteint")
             mdotdos = 0
 
         dm = mdotdos
@@ -130,5 +130,6 @@ def morton(
         "mdot": mdot,
         "Vdot": Vdot,
         "Dmdot": Dmdot,
+        "mmax": m[-1] >= mmax,
         "playerid": playerid,
     }

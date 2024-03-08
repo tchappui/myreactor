@@ -37,6 +37,7 @@ def play(request, playerid):
         "mdot": solvers.mdot0,
         "Vdot": solvers.Vdot0,
         "Dmdot": solvers.Dmdot,
+        "mmax": False,
         "playerid": playerid,
     }
 
