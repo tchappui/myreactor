@@ -37,7 +37,7 @@ T0 = 298.0  # K
 Tj0 = 298.0  # K
 Tjset0 = 298.0  # K
 
-tdos = 1.5  # h
+tdos = 8  # h
 mdot0 = mF / tdos / 3600.0  # g / s
 Vdot0 = mdot0 / 1000.0 / rho  # m3 / s
 Dmdot = 0.01  # g / s
@@ -79,12 +79,13 @@ def morton(
         RD = r1  # mol / g / s
         RE = r2  # mol / g / s
 
+        mdotdos = mdot
         if m > mmax:
             print("mmax atteint")
-            mdot = 0
+            mdotdos = 0
 
-        dm = 0
-        dNA = RA * m  # + mdot * CAF  # mol / s
+        dm = mdotdos
+        dNA = RA * m + mdotdos * CAF  # mol / s
         dNB = RB * m  # mol / s
         dNC = RC * m  # mol / s
         dND = RD * m  # mol / s
