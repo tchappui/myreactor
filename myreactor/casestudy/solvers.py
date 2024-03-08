@@ -38,9 +38,9 @@ Tj0 = 298.0  # K
 Tjset0 = 298.0  # K
 
 tdos = 8  # h
-mdot0 = mF / tdos / 3600.0  # g / s
+mdot0 = int(mF / tdos / 3600.0)  # g / s
 Vdot0 = mdot0 / 1000.0 / rho  # m3 / s
-Dmdot = 1.0  # g / s
+Dmdot = 1  # g / s
 
 
 def morton(
