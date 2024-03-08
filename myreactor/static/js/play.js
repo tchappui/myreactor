@@ -60,7 +60,7 @@ $(document).ready(function () {
                 );
                 $("#X-display").html("X = " + Number((data.X * 100).toFixed(2)).toString() + " %")
 
-                if (data.X >= 0.95 && data.T < 220+273) {
+                if (data.X >= 0.95 && data.T < 168+273) {
                     // Victoire
                     clearInterval(interval_id);
                     $("#victoire").modal("show");
@@ -80,7 +80,7 @@ $(document).ready(function () {
 
                 }
 
-                if (data.T > 220+273) {
+                if (data.T > 168+273) {
                     // Boom
                     clearInterval(interval_id);
                     $("#runaway").modal("show");
