@@ -63,7 +63,6 @@ $(document).ready(function () {
                 if (data.X >= 0.95 && data.T < 168+273) {
                     // Victoire
                     clearInterval(interval_id);
-                    $("#victoire").modal("show");
                     $.ajax({
                         url: $("#plots").attr("data-url") + "score/",
                         type: 'post',
@@ -76,6 +75,8 @@ $(document).ready(function () {
                         success: function (data) {
                         }
                     });
+                    $("#victoire").modal("show");
+                    
                     
 
                 }
