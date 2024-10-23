@@ -8,9 +8,9 @@
   <a href="/" class="align-self-start">
     <img src="{% static 'img/logo.png' %}" width="250px">
   </a>
-  <a href="/">
+  {% comment %} <a href="/">
     <img class="m-4" src="{% static 'img/reaction.png' %}" width="600px">
-  </a>
+  </a> {% endcomment %}
   <ol class="scores">
     {% for score in scores %}
     <li {% if forloop.first %}class="first"{% endif %}>{{score.player.name }}: {{ score.total_reaction_time }} min</li>
