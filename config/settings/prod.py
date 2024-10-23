@@ -11,7 +11,9 @@ DATABASES = {
 DATABASES["default"]["CONN_MAX_AGE"] = env.int(
     "DJANGO_CONN_MAX_AGE", default=60
 )  # noqa: F405
-DATABASES["default"]["OPTIONS"] = {"charset": "utf8mb4"}
+DATABASES["default"]["OPTIONS"] = {
+    **env.json("DJANGO_DATABASE_OPTIONS", default={})
+}
 
 # SECURITY
 SECURE_PROXY_SSL_HEADER = ("DJANGO_HTTP_X_FORWARDED_PROTO", "https")
