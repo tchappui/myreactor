@@ -19,7 +19,7 @@ from config import BASE_DIR
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env(
-    "SECRET_KEY",
+    "DJANGO_SECRET_KEY",
     default="django-insecure-%xf%@jazh2*d(x=9&a$%i%%o=*ivi$muscxb$owfxf%kz7eynk",
 )
 
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_extensions",
     "crispy_forms",
     "crispy_bootstrap4",
 ]
@@ -83,7 +84,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    "default": env.db("DATABASE_URL", default="sqlite:///db.sqlite3"),
+    "default": env.db("DJANGO_DATABASE_URL", default="sqlite:///db.sqlite3"),
 }
 
 
