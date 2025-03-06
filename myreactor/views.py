@@ -4,7 +4,7 @@ import numpy as np
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 
-from .forms import PlayerForm
+from .forms import PlayerForm, ResetForm
 from .players.models import Player
 from .scores.models import Score
 
@@ -84,10 +84,14 @@ def play_data(request):
 
 def reset(request):
     if request.method == "POST":
-        Score.objects.all().delete()
-        Player.objects.all().delete()
-        return redirect("myreactor:index")
-    return render(request, "myreactor/reset.html")
+        form = ResetForm(request.POST)
+        if form.is_valid():
+            Score.objects.all().delete()
+            Player.objects.all().delete()
+            return redirect("myreactor:index")
+    else:
+        form = ResetForm()
+    return render(request, "myreactor/reset.html", context={"form": form})
 
 
 def score(request):
