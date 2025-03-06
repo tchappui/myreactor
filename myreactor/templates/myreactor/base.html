@@ -36,8 +36,9 @@
     </main>
         
     {% block footer %}
-    <footer id="footer">
-        <p>&copy; 2024 Institut ChemTech - Haute Ecole d'Ingénierie et d'Architecture de Fribourg</p>
+    <footer id="footer" class="d-flex justify-content-between">
+        <p>&copy; 2025 Institut ChemTech - Haute Ecole d'Ingénierie et d'Architecture de Fribourg</p>
+        <div><a href="{% url 'myreactor:reset' %}" class="text-secondary">Réinitialiser les scores</a></div>
     </footer>
     {% endblock %}
 

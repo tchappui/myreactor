@@ -6,7 +6,7 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS")
 
 DATABASES = {
-    "default": env.db("DJANGO_DATABASE_URL"),
+    "default": env.db("DJANGO_DATABASE_URL", default="sqlite:///db.sqlite3"),
 }
 DATABASES["default"]["CONN_MAX_AGE"] = env.int(
     "DJANGO_CONN_MAX_AGE", default=60

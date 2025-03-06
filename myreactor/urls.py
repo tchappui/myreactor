@@ -12,5 +12,5 @@ urlpatterns = [
     path("play/data/score/", views.score, name="score"),
     path("info/<int:playerid>/", views.info, name="info"),
     path("register/", views.register, name="register"),
-    path("reset-all-scores/", views.reset, name="reset"),
+    path("reset/", views.reset, name="reset"),
 ]

@@ -1,0 +1,19 @@
+{% extends 'myreactor/base.html' %}
+
+{% block main %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Réinitialisation des scores</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <form method="post" class="d-flex justify-content-center" style="margin-top: 20px;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success">Réinitialiser</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock main %}

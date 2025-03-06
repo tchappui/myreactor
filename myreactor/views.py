@@ -82,6 +82,14 @@ def play_data(request):
     return JsonResponse(data)
 
 
+def reset(request):
+    if request.method == "POST":
+        Score.objects.all().delete()
+        Player.objects.all().delete()
+        return redirect("myreactor:index")
+    return render(request, "myreactor/reset.html")
+
+
 def score(request):
     data = {k: i for k, i in request.POST.dict().items()}
     player = Player.objects.get(pk=int(data["player"]))
@@ -95,9 +103,4 @@ def score(request):
 
 
 def restart(request):
-    return redirect("myreactor:index")
-
-
-def reset(request):
-    Score.objects.all().delete()
     return redirect("myreactor:index")
