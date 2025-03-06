@@ -1,0 +1,17 @@
+[Unit]
+Description=gunicorn daemon for the myreactor project
+Requires=myreactor-gunicorn.socket
+After=network.target
+
+[Service]
+User=myreactor
+Group=www-data
+WorkingDirectory=/home/myreactor/myreactor
+ExecStart=/home/myreactor/myreactor/.venv/bin/gunicorn \
+          --access-logfile - \
+          --workers 3 \
+          --bind unix:/run/myreactor-gunicorn.sock \
+          config.wsgi:application
+
+[Install]
+WantedBy=multi-user.target

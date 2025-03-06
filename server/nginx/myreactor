@@ -1,0 +1,29 @@
+server {
+    listen 80 default_server;
+    return 444;
+}
+
+server { 
+        
+    listen 80; 
+    server_name myreactor.geniechimique.ch; 
+    client_max_body_size 10M;
+        
+    location /static/ {
+        alias /home/myreactor/myreactor/staticfiles/;
+    }
+
+    location /media/ {
+        alias /home/myreactor/myreactor/media/;
+    }
+
+    location / {
+        try_files $uri @proxy_to_django;
+    }
+
+    location @proxy_to_django {
+        include proxy_params;
+        proxy_redirect off;
+        proxy_pass http://unix:/run/myreactor-gunicorn.sock;
+    }
+}
