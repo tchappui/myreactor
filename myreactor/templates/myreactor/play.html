@@ -110,6 +110,10 @@
   <source src="{% static 'sounds/explosion.mp3' %}" type="audio/mpeg">
   Ton navigateur ne supporte pas l'audio HTML5.
 </audio>
+<audio id="champions-sound">
+  <source src="{% static 'sounds/champions.mp3' %}" type="audio/mpeg">
+  Ton navigateur ne supporte pas l'audio HTML5.
+</audio>
 {% endblock footer %}
 
 {% block bottom_scripts %}
@@ -258,7 +262,15 @@
 
       // Quand la modale #runaway s'affiche (avec Bootstrap)
       $('#runaway').on('shown.bs.modal', function () {
-        const sound = document.getElementById('runaway-sound');
+          const sound = document.getElementById('runaway-sound');
+          sound.play().catch(function(e){
+              console.log("Lecture du son bloquée :", e);
+          });
+      });
+
+      // Quand la modale #victoire s'affiche (avec Bootstrap)
+      $('#victoire').on('shown.bs.modal', function () {
+        const sound = document.getElementById('champions-sound');
         sound.play().catch(function(e){
             console.log("Lecture du son bloquée :", e);
         });
