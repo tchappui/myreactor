@@ -105,7 +105,12 @@
 
 {% endblock %}
 
-{% block footer %}{% endblock footer %}
+{% block footer %}
+<audio id="runaway-sound">
+  <source src="{% static 'sounds/explosion.mp3' %}" type="audio/mpeg">
+  Ton navigateur ne supporte pas l'audio HTML5.
+</audio>
+{% endblock footer %}
 
 {% block bottom_scripts %}
 <script>
@@ -250,6 +255,14 @@
         }
 
       });
+
+      // Quand la modale #runaway s'affiche (avec Bootstrap)
+      $('#runaway').on('shown.bs.modal', function () {
+        const sound = document.getElementById('runaway-sound');
+        sound.play().catch(function(e){
+            console.log("Lecture du son bloquée :", e);
+        });
+    });
 </script>
 <script src="{% static "js/play.js" %}"></script>
 {% endblock %}
